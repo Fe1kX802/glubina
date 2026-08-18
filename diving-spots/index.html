@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiveSpots - Карта водоемов для дайверов</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header class="header">
+        <h1>🤿 DiveSpots</h1>
+        <p class="subtitle">Интерактивная карта водоемов для дайверов</p>
+    </header>
+    
+    <main class="container">
+        <div id="map"></div>
+        
+        <!-- Modal for water body details -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2 id="modal-title">Название водоема</h2>
+                <div id="modal-info">
+                    <p><strong>Тип:</strong> <span id="water-type">-</span></p>
+                    <p><strong>Площадь:</strong> <span id="water-area">-</span></p>
+                    
+                    <div class="rating-section">
+                        <h3>Оценки дайверов</h3>
+                        
+                        <div class="rating-item">
+                            <label>Средняя глубина (м):</label>
+                            <div class="rating-display">
+                                <span id="depth-value">-</span>
+                                <button class="rate-btn" data-param="depth" data-value="-1">-</button>
+                                <button class="rate-btn" data-param="depth" data-value="0">0</button>
+                                <button class="rate-btn" data-param="depth" data-value="1">+</button>
+                            </div>
+                        </div>
+                        
+                        <div class="rating-item">
+                            <label>Прозрачность воды:</label>
+                            <div class="rating-stars" id="clarity-stars">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rating-item">
+                            <label>Удобство подхода к воде:</label>
+                            <div class="rating-stars" id="access-stars">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rating-item">
+                            <label>Инфраструктура:</label>
+                            <div class="rating-stars" id="infrastructure-stars">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rating-item">
+                            <label>Общая оценка:</label>
+                            <div class="rating-stars" id="overall-stars">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="reviews-section">
+                        <h3>Отзывы</h3>
+                        <div id="reviews-list"></div>
+                        <button id="add-review-btn" class="add-review-btn">Добавить отзыв</button>
+                    </div>
+                    
+                    <button id="save-rating-btn" class="save-btn">Сохранить оценку</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Review form modal -->
+        <div id="review-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-review-btn">&times;</span>
+                <h2>Добавить отзыв</h2>
+                <form id="review-form">
+                    <textarea id="review-text" placeholder="Ваш отзыв о этом водоеме..." rows="4" required></textarea>
+                    <button type="submit" class="save-btn">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>Данные карты: © <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a></p>
+        <p>Данные о водоемах: © <a href="https://wiki.openstreetmap.org/wiki/Key:leisure" target="_blank">OpenStreetMap</a></p>
+    </footer>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
